@@ -1,0 +1,78 @@
+{
+ "kind": "books#volumes",
+ "totalItems": 1,
+ "items": [
+  {
+   "kind": "books#volume",
+   "id": "sFj3SsYYRJEC",
+   "etag": "UXnlmv0zZow",
+   "selfLink": "https://www.googleapis.com/books/v1/volumes/sFj3SsYYRJEC",
+   "volumeInfo": {
+    "title": "Software Testing",
+    "subtitle": "An ISTQB-ISEB Foundation Guide",
+    "authors": [
+     "Angelina Samaroo",
+     "Geoff Thompson",
+     "Peter Williams"
+    ],
+    "publisher": "BCS, The Chartered Institute",
+    "publishedDate": "2010",
+    "description": "The bestselling software testing title is the only official textbook of the ISTQB - ISEB Foundation Certificate in Software Testing. This revised 2nd edition covers the 2010 update to the exam syllabus. It is ideal for those with a little experience of software testing who wish to cement their knowledge with industry-recognised techniques and theory. \"Succinctly and clearly written with no non-sense. An unreserved 5 for value for money\" IT Training Magazine (referring to 1st edition)",
+    "industryIdentifiers": [
+     {
+      "type": "ISBN_13",
+      "identifier": "9781906124762"
+     },
+     {
+      "type": "ISBN_10",
+      "identifier": "1906124760"
+     }
+    ],
+    "readingModes": {
+     "text": false,
+     "image": true
+    },
+    "pageCount": 224,
+    "printType": "BOOK",
+    "categories": [
+     "Computers"
+    ],
+    "averageRating": 2.0,
+    "ratingsCount": 1,
+    "contentVersion": "preview-1.0.0",
+    "imageLinks": {
+     "smallThumbnail": "http://bks0.books.google.dk/books?id=sFj3SsYYRJEC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+     "thumbnail": "http://bks0.books.google.dk/books?id=sFj3SsYYRJEC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    },
+    "language": "en",
+    "previewLink": "http://books.google.dk/books?id=sFj3SsYYRJEC&printsec=frontcover&dq=isbn:9781906124762&hl=&cd=1&source=gbs_api",
+    "infoLink": "http://books.google.dk/books?id=sFj3SsYYRJEC&dq=isbn:9781906124762&hl=&source=gbs_api",
+    "canonicalVolumeLink": "http://books.google.dk/books/about/Software_Testing.html?hl=&id=sFj3SsYYRJEC"
+   },
+   "saleInfo": {
+    "country": "DK",
+    "saleability": "NOT_FOR_SALE",
+    "isEbook": false
+   },
+   "accessInfo": {
+    "country": "DK",
+    "viewability": "PARTIAL",
+    "embeddable": true,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+     "isAvailable": false
+    },
+    "pdf": {
+     "isAvailable": false
+    },
+    "webReaderLink": "http://books.google.dk/books/reader?id=sFj3SsYYRJEC&hl=&printsec=frontcover&output=reader&source=gbs_api",
+    "accessViewStatus": "SAMPLE",
+    "quoteSharingAllowed": false
+   },
+   "searchInfo": {
+    "textSnippet": "The bestselling software testing title is the only official textbook of the ISTQB - ISEB Foundation Certificate in Software Testing. This revised 2nd edition covers the 2010 update to the exam syllabus."
+   }
+  }
+ ]
+}

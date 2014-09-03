@@ -1,9 +1,6 @@
 package edu.kea.pm.bookkeeper.model;
 
 import java.io.Serializable;
-import java.util.List;
-
-import android.text.TextUtils;
 
 public class Book implements Serializable
 {
@@ -60,19 +57,6 @@ public class Book implements Serializable
 		this.authors = authors;
 	}
 
-	/**
-	 * Adds an author to the book.
-	 * @param authors the authors to add
-	 */
-	public void addAuthor(String author)
-	{
-		if (TextUtils.isEmpty(this.authors)) {
-			this.authors = author;
-		} else {
-			this.authors += ", "+author;
-		}
-	}
-	
 	/**
 	 * @return the comment
 	 */

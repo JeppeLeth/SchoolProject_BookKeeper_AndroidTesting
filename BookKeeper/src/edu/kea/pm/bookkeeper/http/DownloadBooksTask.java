@@ -6,8 +6,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import android.os.AsyncTask;
+import edu.kea.pm.bookkeeper.api.BookAPI;
 import edu.kea.pm.bookkeeper.model.Book;
-import edu.kea.pm.bookkeeper.model.BookAPI;
 
 public class DownloadBooksTask extends AsyncTask<String, Void, Book>{
 
@@ -43,9 +43,9 @@ public class DownloadBooksTask extends AsyncTask<String, Void, Book>{
 		 try
 		{
 			// Fetches book information:
-			return BookAPI.readISBN(params[0]);
+            return BookAPI.readISBN(params[0]);
 
-		} catch (IOException e) {
+        } catch (Exception e) {
 			e.printStackTrace();
 			
 		}
