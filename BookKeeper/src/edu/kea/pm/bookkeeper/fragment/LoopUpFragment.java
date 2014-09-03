@@ -19,7 +19,6 @@ import com.google.zxing.integration.android.IntentIntegrator;
 
 import edu.kea.pm.bookkeeper.R;
 import edu.kea.pm.bookkeeper.activity.BookInfoActivity;
-import edu.kea.pm.bookkeeper.model.Book;
 
 public class LoopUpFragment extends Fragment
 {

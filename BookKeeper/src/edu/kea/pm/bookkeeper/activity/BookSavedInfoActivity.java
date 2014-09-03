@@ -10,7 +10,6 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.inputmethod.InputMethodManager;
 import edu.kea.pm.bookkeeper.R;
 import edu.kea.pm.bookkeeper.database.Database;
 import edu.kea.pm.bookkeeper.database.DatabaseImpl;

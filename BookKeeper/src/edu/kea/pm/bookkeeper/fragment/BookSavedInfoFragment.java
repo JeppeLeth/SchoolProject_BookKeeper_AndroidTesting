@@ -1,7 +1,6 @@
 package edu.kea.pm.bookkeeper.fragment;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -23,7 +22,7 @@ public class BookSavedInfoFragment extends Fragment
 	private TextView mDescription;
 	private TextView mPages;
 	private TextView mPublished;
-	private ImageView mCoverImage;
+    private ImageView mCoverImage;
 	private ImageView mStatus;
 	private TextView mComment;
 	private TextView mLoaner;
