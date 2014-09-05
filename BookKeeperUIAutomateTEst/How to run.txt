@@ -1,0 +1,6 @@
+android create uitest-project -n BookKeeperUIAutomateTEst -t 30 -p C:\Users\Jeppe\Dropbox\Java\Android\BookKeeperUIAutomateTEst
+
+adb push C:\Users\Jeppe\Dropbox\Java\Android\BookKeeperUIAutomateTEst\bin\BookKeeperUIAutomateTEst.jar /data/local/tmp/
+
+adb shell uiautomator runtest BookKeeperUIAutomateTEst.jar -c edu.kea.pm.bookkeeper.uitest.LaunchBookKeeper
+
