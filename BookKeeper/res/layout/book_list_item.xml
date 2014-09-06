@@ -1,45 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="?android:attr/listPreferredItemHeight"
-    android:background="#AAFFFFFF"
-    android:gravity="center"
-    android:paddingLeft="5dp"
-    android:paddingRight="5dp" >
+    android:layout_height="wrap_content"
+    android:padding="5dp" >
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="Title" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/listPreferredItemHeight"
+        android:background="@drawable/card_selector"
+        android:gravity="center"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" >
 
-    <TextView
-        android:id="@+id/authors"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/title"
-        android:layout_toLeftOf="@+id/status_indication"
-        android:text="Authors" />
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Title" />
 
-    <TextView
-        android:id="@+id/year"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:text="Year" />
+        <TextView
+            android:id="@+id/authors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/title"
+            android:layout_toLeftOf="@+id/status_indication"
+            android:text="Authors" />
 
-    <ImageView
-        android:id="@+id/status_indication"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/authors"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/authors"
-        android:layout_marginRight="20dp"
-        android:src="@drawable/book_red" />
+        <TextView
+            android:id="@+id/year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="Year" />
 
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/status_indication"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/authors"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/authors"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/book_red" />
+    </RelativeLayout>
+
+</FrameLayout>

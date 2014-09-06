@@ -12,7 +12,6 @@ import static edu.kea.pm.bookkeeper.api.BookAPI.KEY_PUBLISHED_DATE;
 import static edu.kea.pm.bookkeeper.api.BookAPI.KEY_THUMBNAIL;
 import static edu.kea.pm.bookkeeper.api.BookAPI.KEY_TITLE;
 import static edu.kea.pm.bookkeeper.api.BookAPI.KEY_VOLUME_INFO;
-import static org.apache.commons.lang3.StringUtils.join;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -102,5 +101,24 @@ public class JsonParser {
         JSONObject id = industryIdentifiers.getJSONObject(0);
         return getString(id, KEY_IDENTIFIER);
     }
+    
+	private static String join(List<String> list, String separator) {
+		if (list == null) {
+			return null;
+		}
+
+		StringBuffer buf = new StringBuffer();
+		int endIndex = list.size();
+
+		for (int i = 0; i < endIndex; i++) {
+			if (i > 0) {
+				buf.append(separator);
+			}
+			if (list.get(i) != null) {
+				buf.append(list.get(i));
+			}
+		}
+		return buf.toString();
+	}
 
 }

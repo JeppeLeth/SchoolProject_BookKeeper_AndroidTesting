@@ -33,7 +33,7 @@ public class BookListAdapter extends CursorAdapter {
 			this.statusIndication = statusIndication;
 		}
 	
-		public static ViewHolder create(RelativeLayout rootView) {
+		public static ViewHolder create(ViewGroup rootView) {
 			TextView title = (TextView)rootView.findViewById( R.id.title );
 			TextView authors = (TextView)rootView.findViewById( R.id.authors );
 			TextView year = (TextView)rootView.findViewById( R.id.year );
@@ -61,7 +61,7 @@ public class BookListAdapter extends CursorAdapter {
 	@Override
 	public View newView(Context context, Cursor cursor, ViewGroup parent) {
 		View view = mInflater.inflate( R.layout.book_list_item, parent, false );
-		view.setTag( ViewHolder.create( (RelativeLayout)view ) );
+		view.setTag( ViewHolder.create( (ViewGroup)view ) );
 		return view;
 	}
 

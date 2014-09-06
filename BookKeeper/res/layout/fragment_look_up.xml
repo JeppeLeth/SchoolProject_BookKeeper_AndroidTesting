@@ -1,63 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
     android:layout_height="match_parent" >
-
-    <EditText
-        android:id="@+id/isbnEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:ems="12"
-        android:hint="ISBN / barcode"
-        android:imeOptions="actionSearch"
-        android:inputType="number" >
-
-        <requestFocus />
-    </EditText>
-
-    <Button
-        android:id="@+id/buttonLookUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/isbnEditText"
-        android:layout_below="@+id/isbnEditText"
-        android:drawableLeft="@drawable/action_search"
-        android:layout_marginTop="16dp"
-        android:text="Look up" />
-
-    <Button
-        android:id="@+id/buttonScan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/buttonLookUp"
-        android:layout_alignLeft="@+id/isbnEditText"
-        android:drawableLeft="@drawable/icon_barcode"
-        android:gravity="left|center_vertical"
-        android:text="Scan" />
-
+    
+    
     <TextView
-        android:id="@+id/isbnLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/isbnEditText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp"
+        android:layout_weight="0.5"
+        android:layout_alignParentLeft="true"
         android:gravity="center"
-        android:text="Enter ISBN or barcode"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/isbnLabel"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"
         android:text="Online book information"
-        android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#121288"
         android:textSize="30sp" />
 
-</RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/unpressed_background" >
+
+        <EditText
+            android:id="@+id/isbnEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/barcode"
+            android:ems="12"
+            android:gravity="center"
+            android:hint="ISBN / Barcode"
+            android:imeOptions="actionSearch"
+            android:inputType="number"
+            android:textAppearance="?android:textAppearanceLarge" >
+
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/buttonLookUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/isbnEditText"
+            android:layout_below="@+id/isbnEditText"
+            android:layout_marginTop="16dp"
+            android:drawableLeft="@drawable/action_search"
+            android:text="Look up" />
+
+        <Button
+            android:id="@+id/buttonScan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/buttonLookUp"
+            android:layout_alignLeft="@+id/isbnEditText"
+            android:drawableLeft="@drawable/icon_barcode"
+            android:gravity="left|center_vertical"
+            android:text="Scan" />
+
+        <View
+            android:id="@+id/barcode"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_alignLeft="@+id/isbnEditText"
+            android:layout_alignRight="@+id/isbnEditText"
+            android:background="@drawable/barcode_bg" />
+    </RelativeLayout>
+    
+    <View android:layout_height="0dp" android:layout_width="match_parent"
+        android:layout_weight="1"/>
+
+
+</LinearLayout>

@@ -84,6 +84,8 @@ public class MainActivity extends FragmentActivity {
 
         if (savedInstanceState == null) {
             selectItem(0);
+        } else {
+        	setTitle(savedInstanceState.getCharSequence("TITLE"));
         }
     }
 
@@ -173,6 +175,20 @@ public class MainActivity extends FragmentActivity {
         // Sync the toggle state after onRestoreInstanceState has occurred.
         mDrawerToggle.syncState();
     }
+    
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    	// TODO Auto-generated method stub
+    	super.onRestoreInstanceState(savedInstanceState);
+    	setTitle(savedInstanceState.getCharSequence("TITLE"));
+    }
+    
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+    	// TODO Auto-generated method stub
+    	super.onSaveInstanceState(outState);
+    	outState.putCharSequence("TITLE", mTitle);
+    }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -185,6 +201,7 @@ public class MainActivity extends FragmentActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent intent)
     {
     	super.onActivityResult(requestCode, resultCode, intent);
+    	
     	Log.d(getClass().getSimpleName(), "intent="+intent);
     	IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
     	if (scanningResult != null) {
@@ -199,6 +216,7 @@ public class MainActivity extends FragmentActivity {
     	}
     	Toast toast = Toast.makeText(this,
     			"No scan data received!", Toast.LENGTH_SHORT);
+    	
     	toast.show();
     }
     
