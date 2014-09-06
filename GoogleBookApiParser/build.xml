@@ -20,14 +20,15 @@
 		<delete dir="${dist.dir}" />
 	</target>
 
-	<target name="makedir">
+	<target name="init">
+		<tstamp />
 		<mkdir dir="${build.src.dir}" />
 		<mkdir dir="${build.test.dir}" />
 		<mkdir dir="${test.reports.dir}" />
 		<mkdir dir="${dist.dir}" />
 	</target>
 
-	<target name="compile" depends="clean, makedir">
+	<target name="compile" depends="clean, init">
 		<javac includeantruntime="false" srcdir="${src.dir}" destdir="${build.src.dir}">
 			<classpath refid="junit.class.path" />
 		</javac>
