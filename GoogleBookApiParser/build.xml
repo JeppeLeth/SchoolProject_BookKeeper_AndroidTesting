@@ -39,8 +39,6 @@
 	</target>
 
 	<target name="junit" depends="compile">
-		<pathconvert  property="testoutput" refid="junit.class.path"/>
-		<echo>Path = ${testoutput}</echo>
 		<junit printsummary="on" fork="true" haltonfailure="yes">
 			<classpath refid="junit.class.path" />
 			<classpath>
@@ -55,10 +53,6 @@
 		</junit>
 	</target>
 
-	<target name="main" depends="compile, junit">
-		<description>Main target</description>
-	</target>
-	
 	<target name="dist" depends="compile">
 		<jar jarfile="${dist.dir}/lib/google-bookAPI-parser-${DSTAMP}.jar"
 			basedir="${build.src.dir}" />

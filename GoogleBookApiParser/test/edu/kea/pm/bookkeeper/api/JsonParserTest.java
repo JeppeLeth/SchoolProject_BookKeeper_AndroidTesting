@@ -5,9 +5,9 @@ import static edu.kea.pm.bookkeeper.api.BookAPI.KEY_IDENTIFIER;
 import static edu.kea.pm.bookkeeper.api.BookAPI.KEY_IMAGE_LINKS;
 import static edu.kea.pm.bookkeeper.api.BookAPI.KEY_INDUSTRY_IDENTIFIERS;
 import static edu.kea.pm.bookkeeper.api.BookAPI.KEY_THUMBNAIL;
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.io.File;
 import java.io.FileReader;
