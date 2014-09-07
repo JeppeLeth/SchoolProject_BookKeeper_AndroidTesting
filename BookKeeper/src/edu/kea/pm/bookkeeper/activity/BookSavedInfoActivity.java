@@ -30,9 +30,9 @@ public class BookSavedInfoActivity extends FragmentActivity implements BookSaved
 	private static final int EDIT_BOOK_REQUEST_CODE = 2;
 	
 	@Override
-	protected void onCreate(Bundle bundle)
+	protected void onCreate(Bundle savedInstanceState)
 	{
-		super.onCreate(bundle);
+		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_single_frame_container);
 		
 		mBook = (Book) getIntent().getSerializableExtra(BUNDLE_BOOK);

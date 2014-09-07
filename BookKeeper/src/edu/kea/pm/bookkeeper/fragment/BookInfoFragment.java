@@ -46,7 +46,7 @@ public class BookInfoFragment extends Fragment
         mPages = (TextView) rootView.findViewById(R.id.pages);
         mPublished = (TextView) rootView.findViewById(R.id.published);
         mCoverImage = (ImageView) rootView.findViewById(R.id.imageCover);
-        updateBook();
+    	updateBook();
         return rootView;
     }
     

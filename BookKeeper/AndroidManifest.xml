@@ -40,11 +40,11 @@
         <activity 
             android:name="edu.kea.pm.bookkeeper.activity.BookAddActivity"
             android:label="@string/activity_book_add_name"
-		    android:parentActivityName="edu.kea.pm.bookkeeper.activity.BookInfoActivity" >
+		    android:parentActivityName="edu.kea.pm.bookkeeper.activity.MainActivity" >
 		    <!-- Parent activity meta-data to support 4.0 and lower -->
 		    <meta-data
 		        android:name="android.support.PARENT_ACTIVITY"
-		        android:value="edu.kea.pm.bookkeeper.activity.BookInfoActivity" />
+		        android:value="edu.kea.pm.bookkeeper.activity.MainActivity" />
     	</activity>
     	
         <activity 

@@ -9,6 +9,11 @@
         <item>Look up book</item>
         <item>My books</item>
     </string-array>
+    
+    <array name="menu_array_icons">
+        <item>@drawable/action_search</item>
+        <item>@drawable/ic_action_view_as_list</item>
+    </array>
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>

@@ -80,7 +80,7 @@ public class DatabaseImpl implements Database{
         SQLiteDatabase database = db.getReadableDatabase();
         SQLiteQueryBuilder query = new SQLiteQueryBuilder();
         query.setTables(BookTable.TABLE_NAME+" LEFT JOIN "+LoanTable.TABLE_NAME+" ON ("+BookTable.TABLE_NAME+"."+BookTable.ID+" = "+LoanTable.TABLE_NAME+"."+LoanTable.BOOK_ID+")");
-        Cursor c = query.query(database, columns, null, null, null, null, BookTable.TITLE + " DESC");
+        Cursor c = query.query(database, columns, null, null, null, null, BookTable.TITLE + " ASC");
      
         return c;
 	}

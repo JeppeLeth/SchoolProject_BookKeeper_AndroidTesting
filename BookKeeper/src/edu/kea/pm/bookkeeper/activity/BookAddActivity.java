@@ -23,19 +23,24 @@ public class BookAddActivity extends FragmentActivity implements BookAddFragment
 	public static final String BUNDLE_BOOK = "BUNDLE_BOOK";
 	
 	@Override
-	protected void onCreate(Bundle bundle)
+	protected void onCreate(Bundle savedInstanceState)
 	{
-		super.onCreate(bundle);
+		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_single_frame_container);
 		
 		mBook = (Book) getIntent().getSerializableExtra(BUNDLE_BOOK);
 		mDatabase = new DatabaseImpl(this);
 		
-		mFragment = new BookAddFragment();
-		mFragment.setArguments(bundle);
+		if (savedInstanceState == null) {
+			mFragment = new BookAddFragment();
+			mFragment.setArguments(savedInstanceState);
+			
+			FragmentManager fragmentManager = getSupportFragmentManager();
+			fragmentManager.beginTransaction().replace(R.id.content_frame, mFragment, BookAddFragment.class.getSimpleName()).commit();
+		} else {
+			mFragment = (BookAddFragment) getSupportFragmentManager().findFragmentByTag(BookAddFragment.class.getSimpleName());
+		}
 		
-		FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, mFragment).commit();
         
 	}
 

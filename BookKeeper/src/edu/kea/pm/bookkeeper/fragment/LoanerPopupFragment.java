@@ -59,7 +59,7 @@ public class LoanerPopupFragment extends DialogFragment
 	        inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
 			
 			
-	        Button okButton = (Button) view.findViewById(R.id.loaner_ok_button); //connects to XML OK button
+	        Button okButton = (Button) view.findViewById(android.R.id.button1); //connects to XML OK button
 			
 	        okButton.setOnClickListener(new OnClickListener() {
 				

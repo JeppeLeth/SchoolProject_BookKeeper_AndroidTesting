@@ -30,23 +30,27 @@ public class BookInfoActivity extends FragmentActivity implements BookInfoFragme
 	public DownloadBooksTask mTask;
 	
 	@Override
-	protected void onCreate(Bundle bundle)
+	protected void onCreate(Bundle savedInstanceState)
 	{
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-		super.onCreate(bundle);
+		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_single_frame_container);
 		
-		mBook = new Book();
 		mBarcode = getIntent().getStringExtra(BUNDLE_BARCODE);
-		
-		mFragment = new BookInfoFragment();
-		mFragment.setArguments(bundle);
-		
-		FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, mFragment).commit();
-        
-       mTask = new DownloadBooksTask(this);
-       mTask.execute(mBarcode);
+		mTask = new DownloadBooksTask(this);
+		if (savedInstanceState == null) {
+			mBook = new Book();
+			
+			mFragment = new BookInfoFragment();
+			mFragment.setArguments(savedInstanceState);
+			
+			FragmentManager fragmentManager = getSupportFragmentManager();
+			fragmentManager.beginTransaction().replace(R.id.content_frame, mFragment).commit();
+			
+			mTask.execute(mBarcode);
+		} else {
+			mBook = (Book) savedInstanceState.getSerializable("BOOK");
+		}
 	}
 	
     @Override
@@ -54,6 +58,12 @@ public class BookInfoActivity extends FragmentActivity implements BookInfoFragme
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.add, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+    
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+    	super.onSaveInstanceState(outState);
+    	outState.putSerializable("BOOK", mBook);
     }
     
     @Override

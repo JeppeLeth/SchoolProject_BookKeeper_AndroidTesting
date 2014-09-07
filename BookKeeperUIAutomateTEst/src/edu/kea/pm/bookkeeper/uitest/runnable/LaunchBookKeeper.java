@@ -1,4 +1,4 @@
-package edu.kea.pm.bookkeeper.uitest;
+package edu.kea.pm.bookkeeper.uitest.runnable;
 
 import android.widget.TextView;
 
@@ -55,7 +55,6 @@ public class LaunchBookKeeper extends UiAutomatorTestCase
 	      // Validate that the package name is the expected one
 	      UiObject settingsValidation = new UiObject(new UiSelector()
 	         .packageName("edu.kea.pm.bookkeeper"));
-	      assertTrue("Unable to detect Book Keeper", 
-	         settingsValidation.exists());   
+	      assertTrue("Unable to detect Book Keeper", settingsValidation.exists());   
 	  }   
 }

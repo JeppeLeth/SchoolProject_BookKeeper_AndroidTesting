@@ -15,11 +15,12 @@
       
   </EditText>
 
-<Button 
-    android:id="@+id/loaner_ok_button"
-    android:layout_height="wrap_content" 
-    android:layout_width="wrap_content"  
-    android:text="@android:string/ok"  
-    android:layout_gravity="center"/>
+	<Button 
+	    android:id="@android:id/button1"
+	    android:layout_height="wrap_content" 
+	    android:layout_width="match_parent"  
+	    style="?android:buttonBarButtonStyle"
+	    android:text="@android:string/ok"  
+	    android:layout_gravity="center"/>
 
 </LinearLayout>

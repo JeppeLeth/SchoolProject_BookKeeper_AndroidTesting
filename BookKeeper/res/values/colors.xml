@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="card_pressed">#ebebeb</color>
+    <color name="card_activated">#500099CC</color>
+    <color name="card_pressed_header">#d6d6d6</color>
+	<color name="actionbar">#4d453e</color>
+	<color name="drawer_bg">#c1ae9d</color>
+
+</resources>

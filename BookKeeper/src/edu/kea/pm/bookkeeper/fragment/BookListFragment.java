@@ -29,9 +29,7 @@ public class BookListFragment extends ListFragment implements OnItemLongClickLis
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (rootView == null) {
-        	rootView = inflater.inflate(R.layout.fragment_book_list, container, false);
-        }
+    	rootView = inflater.inflate(R.layout.fragment_book_list, container, false);
         database = new DatabaseImpl(getActivity());
         return rootView;
     }

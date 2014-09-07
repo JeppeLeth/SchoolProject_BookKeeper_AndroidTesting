@@ -2,6 +2,8 @@ package edu.kea.pm.bookkeeper.activity;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -10,14 +12,17 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -45,6 +50,9 @@ public class MainActivity extends FragmentActivity {
 
         mTitle = mDrawerTitle = getTitle();
         mMenuTitles = getResources().getStringArray(R.array.menu_array);
+        TypedArray typedArray = getResources().obtainTypedArray(R.array.menu_array_icons);
+        final Drawable[] menuIcons = new Drawable[] {typedArray.getDrawable(0), typedArray.getDrawable(1)};
+        typedArray.recycle();
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         mFragmentBookList = new BookListFragment();
@@ -53,8 +61,24 @@ public class MainActivity extends FragmentActivity {
         // set a custom shadow that overlays the main content when the drawer opens
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         // set up the drawer's list view with items and click listener
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, mMenuTitles));
+        // add all items
+        ArrayAdapter<?> listadaptor = new ArrayAdapter<Object>(this, R.layout.drawer_list_item) {
+        	@Override
+        	public int getCount() {
+        		return mMenuTitles.length;
+        	}
+            public View getView(int position, View convertView, ViewGroup container) {
+                if(convertView == null) {
+                    convertView = LayoutInflater.from(getBaseContext()).inflate(R.layout.drawer_list_item, container, false);
+                }
+                TextView title = (TextView) convertView;
+                title.setText(mMenuTitles[position]);
+                title.setCompoundDrawablesWithIntrinsicBounds(menuIcons[position], null, null, null);
+                return convertView;
+            }
+        };
+        mDrawerList.setAdapter(listadaptor);
+        
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         // enable ActionBar app icon to behave as action to toggle nav drawer
@@ -147,10 +171,10 @@ public class MainActivity extends FragmentActivity {
 
     private void selectItem(int position) {
         // update the main content by replacing fragments
-        Fragment fragment = position == 0 ? mFragmentLoopup : new BookListFragment();
+        Fragment fragment = position == 0 ? mFragmentLoopup : mFragmentBookList;
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, fragment.getClass().getSimpleName()).commit();
 
         // update selected item and title, then close the drawer
         mDrawerList.setItemChecked(position, true);
