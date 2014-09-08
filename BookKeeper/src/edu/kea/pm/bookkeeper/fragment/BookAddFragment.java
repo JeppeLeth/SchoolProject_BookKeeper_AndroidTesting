@@ -14,7 +14,6 @@ import edu.kea.pm.bookkeeper.model.Book;
 
 public class BookAddFragment extends Fragment
 {
-	
 	TextView mIsbn;
 	EditText mTitle;
 	EditText mAuthor;
@@ -70,7 +69,7 @@ public class BookAddFragment extends Fragment
     public Book getBookInfo() {
     	Book book = mListener.getBook();
     	Book newBook = new Book();
-    	newBook.setBook_id(book.getBook_id());
+        newBook.setBookId(book.getBookId());
     	newBook.setLoaner(book.getLoaner());
     	newBook.setIsbn(book.getIsbn());
     	newBook.setAuthors(mAuthor.getText().toString());
