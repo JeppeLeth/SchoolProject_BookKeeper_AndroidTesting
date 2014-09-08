@@ -1,4 +1,6 @@
-<project name="GoogleBookApiParser" default="dist" basedir=".">
+<project name="GoogleBookApiParser" default="dist" basedir="." xmlns:jacoco="antlib:org.jacoco.ant">
+
+
 	<property name="src.dir" location="src" />
 	<property name="test.dir" location="test" />
 	<property name="dist.dir" location="dist" />
@@ -7,12 +9,21 @@
 	<property name="build.test.dir" location="${build.dir}/tests" />
 	<property name="test.reports.dir" location="test-reports" />
 
+	<property name="test.coverage.dir" location="test-coverage"/>
+	<property name="test.coverage.report.dir" location="${test.coverage.dir}/site/jacoco" />
+	<property name="test.coverage.exec.file" location="${test.coverage.dir}/jacoco.exec" />
+
+	<taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+		<classpath path="libs/jacocoant.jar" />
+	</taskdef>
+
 	<path id="junit.class.path">
 		<pathelement location="${build.src.dir}" />
 		<fileset dir="libs">
 			<include name="**/*.jar" />
 		</fileset>
 	</path>
+
 
 	<target name="clean">
 		<delete dir="${build.dir}" />
@@ -38,19 +49,47 @@
 		</javac>
 	</target>
 
+
 	<target name="junit" depends="compile">
-		<junit printsummary="on" fork="true" haltonfailure="yes">
-			<classpath refid="junit.class.path" />
-			<classpath>
-				<pathelement location="${build.test.dir}" />
-			</classpath>
-			<formatter type="xml" />
-			<batchtest todir="${test.reports.dir}">
-				<fileset dir="${test.dir}">
-					<include name="**/*Test*.java" />
-				</fileset>
-			</batchtest>
-		</junit>
+		<!-- Step 2: Wrap test execution with the JaCoCo coverage task -->
+		<jacoco:coverage destfile="${test.coverage.exec.file}">
+			<junit printsummary="on" fork="true" haltonfailure="yes">
+				<classpath refid="junit.class.path" />
+				<classpath>
+					<pathelement location="${build.test.dir}" />
+				</classpath>
+				<formatter type="xml" />
+				<batchtest todir="${test.reports.dir}">
+					<fileset dir="${test.dir}">
+						<include name="**/*Test*.java" />
+					</fileset>
+				</batchtest>
+			</junit>
+		</jacoco:coverage>
+	</target>
+	
+	<target name="report" depends="junit">
+		<!-- Step 3: Create coverage report -->
+		<jacoco:report>
+			<!-- This task needs the collected execution data and ... -->
+			<executiondata>
+				<file file="${test.coverage.exec.file}" />
+			</executiondata>
+			<!-- the class files and optional source files ... -->
+			<structure name="JaCoCo Ant Example">
+				<classfiles>
+					<fileset dir="${build.src.dir}" />
+					<fileset dir="${build.test.dir}" />
+				</classfiles>
+				<sourcefiles encoding="UTF-8">
+					<fileset dir="${src.dir}" />
+				</sourcefiles>
+			</structure>
+			<!-- to produce reports in different formats. -->
+			<html destdir="${test.coverage.report.dir}" />
+			<csv destfile="${test.coverage.report.dir}/report.csv" />
+			<xml destfile="${test.coverage.report.dir}/report.xml"/>
+		</jacoco:report>
 	</target>
 
 	<target name="dist" depends="compile">
