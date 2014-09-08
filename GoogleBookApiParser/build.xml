@@ -40,7 +40,7 @@
 	</target>
 
 	<target name="compile" depends="clean, init">
-		<javac includeantruntime="false" srcdir="${src.dir}" destdir="${build.src.dir}">
+		<javac includeantruntime="false" srcdir="${src.dir}" destdir="${build.src.dir}" debug="true">
 			<classpath refid="junit.class.path" />
 		</javac>
 
