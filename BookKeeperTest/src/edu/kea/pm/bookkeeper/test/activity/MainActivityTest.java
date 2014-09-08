@@ -4,16 +4,17 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Instrumentation;
 import android.app.Instrumentation.ActivityMonitor;
 import android.app.Instrumentation.ActivityResult;
 import android.app.UiAutomation;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.Cursor;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.test.ActivityInstrumentationTestCase2;
-import android.test.MoreAsserts;
 import android.test.TouchUtils;
 import android.test.ViewAsserts;
 import android.test.suitebuilder.annotation.MediumTest;
@@ -24,11 +25,8 @@ import android.widget.ListView;
 import edu.kea.pm.bookkeeper.R;
 import edu.kea.pm.bookkeeper.activity.BookInfoActivity;
 import edu.kea.pm.bookkeeper.activity.MainActivity;
-import edu.kea.pm.bookkeeper.database.Database;
-import edu.kea.pm.bookkeeper.database.DatabaseImpl;
 import edu.kea.pm.bookkeeper.fragment.BookListFragment;
 import edu.kea.pm.bookkeeper.fragment.LoopUpFragment;
-import edu.kea.pm.bookkeeper.model.Book;
 
 @SuppressLint("NewApi")
 public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity>
@@ -154,7 +152,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     	return monitor;
     }
     
-    public void testLoopUp_willLaunchNewActivityWhenIsbnIsValid() throws Throwable {
+    public void testButtonLoopUp_willLaunchNewActivityWhenIsbnIsValid() throws Throwable {
         final EditText editText = (EditText) mTestActivity.findViewById(R.id.isbnEditText);
     	runTestOnUiThread(new Runnable() {
 			
@@ -166,10 +164,12 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     	ActivityMonitor monitor = getBookInfoActivityMonitor();
         getInstrumentation().addMonitor(monitor);
         TouchUtils.clickView(this, mTestActivity.findViewById(R.id.buttonLookUp));
+        getInstrumentation().waitForIdleSync();
+        //getInstrumentation().waitForMonitor(monitor);
         assertEquals(1, monitor.getHits());
     }
     
-    public void testLoopUp_willNotLaunchNewActivityWhenIsbnIsEmpty() throws Throwable {
+    public void testButtonLoopUp_willNotLaunchNewActivityWhenIsbnIsEmpty() throws Throwable {
     	ActivityMonitor monitor = getBookInfoActivityMonitor();
         getInstrumentation().addMonitor(monitor);
         TouchUtils.clickView(this, mTestActivity.findViewById(R.id.buttonLookUp));
@@ -225,7 +225,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         assertEquals(expected, editText.getText().toString());
     }
     
-    public void testEditTextIsbn_willHandleRotation() throws Throwable  {
+    public void test1EditTextIsbn_willHandleRotation() throws Throwable  {
     	final EditText editText = (EditText) mTestActivity.findViewById(R.id.isbnEditText);
     	final String expected = "123";
     	runTestOnUiThread(new Runnable() {
@@ -236,14 +236,24 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 				
 			}
 		});
-    	getInstrumentation().getUiAutomation().setRotation(UiAutomation.ROTATION_FREEZE_90);
-
-    	// Re-start the Activity - the onResume() method should restore the state of the Spinner
-        Activity newActivity = getActivity();
+    	
+    	// Re-start the Activity - the onResume() method should restore the state of the text field
+        Activity newActivity = rotate(this);
         EditText newEditText = (EditText) newActivity.findViewById(R.id.isbnEditText);
         assertEquals(expected, newEditText.getText().toString());
     }
     
+    @SuppressWarnings("unchecked") // it's fine
+    public static <T extends Activity> T rotate(ActivityInstrumentationTestCase2<T> testCase) {
+        T activity = testCase.getActivity();
+        int orientation = activity.getWindowManager().getDefaultDisplay().getRotation();
+        int nextOrientation = orientation == Configuration.ORIENTATION_LANDSCAPE ? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT : ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+        Instrumentation.ActivityMonitor monitor = new Instrumentation.ActivityMonitor(activity.getClass().getName(), null, false);
+        testCase.getInstrumentation().addMonitor(monitor);
+        activity.setRequestedOrientation(nextOrientation);
+        testCase.getInstrumentation().waitForIdleSync();
+        return (T) testCase.getInstrumentation().waitForMonitor(monitor);
+    }
 
     
 }

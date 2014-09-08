@@ -118,7 +118,7 @@ public class BookSavedInfoActivityTest extends ActivityInstrumentationTestCase2<
         assertEquals(comment.getText(), mBook.getComment());
         assertEquals(description.getText(), mBook.getDescription());
         assertEquals(loaner.getText(), mBook.getLoaner());
-        assertEquals(pages.getText(), mBook.getPageCount());
+        assertEquals(pages.getText(), String.valueOf(mBook.getPageCount()));
         assertEquals(published.getText(), mBook.getPublished());
         assertEquals(language.getText(), mBook.getLanguage());
     }

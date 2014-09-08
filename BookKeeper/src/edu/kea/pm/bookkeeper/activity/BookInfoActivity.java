@@ -37,7 +37,8 @@ public class BookInfoActivity extends FragmentActivity implements BookInfoFragme
 		setContentView(R.layout.activity_single_frame_container);
 		
 		mBarcode = getIntent().getStringExtra(BUNDLE_BARCODE);
-		mTask = new DownloadBooksTask(this);
+		mTask = new DownloadBooksTask();
+		mTask.setListener(this);
 		if (savedInstanceState == null) {
 			mBook = new Book();
 			
@@ -106,6 +107,7 @@ public class BookInfoActivity extends FragmentActivity implements BookInfoFragme
 	@Override
 	protected void onStop()
 	{
+		mTask.setListener(null);
 		mTask.cancel(true);
 		super.onPause();
 	}

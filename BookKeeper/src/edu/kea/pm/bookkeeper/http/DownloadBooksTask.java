@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import org.json.JSONException;
+
 import android.os.AsyncTask;
 import edu.kea.pm.bookkeeper.api.BookAPI;
 import edu.kea.pm.bookkeeper.model.Book;
@@ -22,8 +24,9 @@ public class DownloadBooksTask extends AsyncTask<String, Void, Book>{
 	public DownloadBooksTask(){
 		
 	}
-	public DownloadBooksTask(DownloadListener listener) {
-		super();
+
+	
+	public void setListener(DownloadListener listener) {
 		this.listener = listener;
 	}
 	
@@ -60,14 +63,14 @@ public class DownloadBooksTask extends AsyncTask<String, Void, Book>{
 		}
 	}
 	
-	protected InputStream download(String urlString) throws IOException {
-	    HttpURLConnection conn = (HttpURLConnection) (new URL(urlString)).openConnection();
-	    conn.setReadTimeout(10000);
-	    conn.setConnectTimeout(15000);
-	    conn.setRequestMethod("GET");
-	    conn.setDoInput(true);
-	    
-	    conn.connect();
-	    return conn.getInputStream();      
-	}
+//	protected InputStream download(String urlString) throws IOException {
+//	    HttpURLConnection conn = (HttpURLConnection) (new URL(urlString)).openConnection();
+//	    conn.setReadTimeout(10000);
+//	    conn.setConnectTimeout(15000);
+//	    conn.setRequestMethod("GET");
+//	    conn.setDoInput(true);
+//	    
+//	    conn.connect();
+//	    return conn.getInputStream();      
+//	}
 }

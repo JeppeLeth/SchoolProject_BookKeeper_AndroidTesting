@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="custom_rules">
+    
+    <!-- 
+    <fileset id="testcases_fileset" dir="src/edu/kea/pm/bookkeeper/uitest/runnable">
+	    <include name="*.java" />
+	</fileset>
+	
+    <pathconvert pathsep="${line.separator}adb shell uiautomator runtest ${project.name}.jar -c edu.kea.pm.bookkeeper.uitest.runnable." property="cases" refid="testcases_fileset">
+	    <mapper>
+	        <flattenmapper />
+	    </mapper>
+	</pathconvert>
+
+    <target name="-pre-compile">
+        <echo file="bin/test_runnables.txt">${cases}</echo>
+		<echo file="bin/test_runnables.txt">${cases}</echo>
+    </target>
+     -->
+
+</project>
