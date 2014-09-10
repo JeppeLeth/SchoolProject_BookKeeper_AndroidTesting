@@ -25,100 +25,109 @@ import edu.kea.pm.bookkeeper.model.Book;
 
 public class JsonParser {
 
-    public static Book parseJson(JSONObject json) throws IOException, JSONException {
-        JSONArray items = getJSONArray(json, KEY_ITEMS);
+	public static Book parseJson(JSONObject json) throws IOException,
+			JSONException {
+		JSONArray items = getJSONArray(json, KEY_ITEMS);
 
-        if (items == null || items.length() == 0) {
-            return null;
-        }
+		if (items == null || items.length() == 0) {
+			return null;
+		}
 
-        JSONObject bookJson = items.getJSONObject(0);
-        JSONObject volumeInfo = getJSONObject(bookJson, KEY_VOLUME_INFO);
+		JSONObject bookJson = items.getJSONObject(0);
+		JSONObject volumeInfo = getJSONObject(bookJson, KEY_VOLUME_INFO);
 
-        if (volumeInfo == null) {
-            return null;
-        }
-        return parseBookInfo(volumeInfo);
-    }
+		if (volumeInfo == null) {
+			return null;
+		}
+		return parseBookInfo(volumeInfo);
+	}
 
-    private static Book parseBookInfo(JSONObject volumeInfo) throws JSONException {
-        Book book = new Book();
-        book.setTitle(getString(volumeInfo, KEY_TITLE));
-        book.setDescription(getString(volumeInfo, KEY_DESCRIPTION));
-        book.setLanguage(getString(volumeInfo, KEY_LANGUAGE));
-        book.setPublished(getString(volumeInfo, KEY_PUBLISHED_DATE));
-        book.setPageCount(getInt(volumeInfo, KEY_PAGE_COUNT));
-        book.setIsbn(getIsbn(volumeInfo));
-        book.setAuthors(getAuthors(volumeInfo));
-        book.setThumbnailURL(getThumbnailURL(volumeInfo));
-        return book;
-    }
+	private static Book parseBookInfo(JSONObject volumeInfo)
+			throws JSONException {
+		Book book = new Book();
+		book.setTitle(getString(volumeInfo, KEY_TITLE));
+		book.setDescription(getString(volumeInfo, KEY_DESCRIPTION));
+		book.setLanguage(getString(volumeInfo, KEY_LANGUAGE));
+		book.setPublished(getString(volumeInfo, KEY_PUBLISHED_DATE));
+		book.setPageCount(getInt(volumeInfo, KEY_PAGE_COUNT));
+		book.setIsbn(getIsbn(volumeInfo));
+		book.setAuthors(getAuthors(volumeInfo));
+		book.setThumbnailURL(getThumbnailURL(volumeInfo));
+		return book;
+	}
 
-    public static String getString(JSONObject object, String key) throws JSONException {
-        return object.has(key) ? object.getString(key) : null;
-    }
+	public static String getString(JSONObject object, String key)
+			throws JSONException {
+		return object.has(key) ? object.getString(key) : null;
+	}
 
-    public static int getInt(JSONObject object, String key) throws JSONException {
-        return object.has(key) ? object.getInt(key) : 0;
-    }
+	public static int getInt(JSONObject object, String key)
+			throws JSONException {
+		return object.has(key) ? object.getInt(key) : 0;
+	}
 
-    public static JSONObject getJSONObject(JSONObject object, String key) throws JSONException {
-        return object.has(key) ? object.getJSONObject(key) : null;
-    }
+	public static JSONObject getJSONObject(JSONObject object, String key)
+			throws JSONException {
+		return object.has(key) ? object.getJSONObject(key) : null;
+	}
 
-    public static JSONArray getJSONArray(JSONObject object, String key) throws JSONException {
-        return object.has(key) ? object.getJSONArray(key) : null;
-    }
+	public static JSONArray getJSONArray(JSONObject object, String key)
+			throws JSONException {
+		return object.has(key) ? object.getJSONArray(key) : null;
+	}
 
-    public static String getAuthors(JSONObject volumeInfo) throws JSONException {
-        JSONArray authors = getJSONArray(volumeInfo, KEY_AUTHORS);
-        if (authors == null) {
-            return null;
-        }
-        List<String> names = getAuthorNames(authors);
+	public static String getAuthors(JSONObject volumeInfo) throws JSONException {
+		JSONArray authors = getJSONArray(volumeInfo, KEY_AUTHORS);
+		if (authors == null) {
+			return null;
+		}
+		List<String> names = getAuthorNames(authors);
 
-        return join(names, ", ");
-    }
+		return join(names, ", ");
+	}
 
-    private static List<String> getAuthorNames(JSONArray authors) throws JSONException {
-        List<String> names = new ArrayList<String>();
-        for (int i = 0; i < authors.length(); i++) {
-            names.add(authors.getString(i));
-        }
-        return names;
-    }
+	private static List<String> getAuthorNames(JSONArray authors)
+			throws JSONException {
+		List<String> names = new ArrayList<String>();
+		for (int i = 0; i < authors.length(); i++) {
+			names.add(authors.getString(i));
+		}
+		return names;
+	}
 
-    public static String getThumbnailURL(JSONObject volumeInfo) throws JSONException {
-        JSONObject imageLinks = getJSONObject(volumeInfo, KEY_IMAGE_LINKS);
-        return imageLinks == null ? null : getString(imageLinks, KEY_THUMBNAIL);
-    }
+	public static String getThumbnailURL(JSONObject volumeInfo)
+			throws JSONException {
+		JSONObject imageLinks = getJSONObject(volumeInfo, KEY_IMAGE_LINKS);
+		return imageLinks == null ? null : getString(imageLinks, KEY_THUMBNAIL);
+	}
 
-    public static String getIsbn(JSONObject volumeInfo) throws JSONException {
-        JSONArray industryIdentifiers = getJSONArray(volumeInfo, KEY_INDUSTRY_IDENTIFIERS);
-        if (industryIdentifiers == null) {
-            return null;
-        }
-        JSONObject id = industryIdentifiers.getJSONObject(0);
-        return getString(id, KEY_IDENTIFIER);
-    }
-    
+	public static String getIsbn(JSONObject volumeInfo) throws JSONException {
+		JSONArray industryIdentifiers = getJSONArray(volumeInfo,
+				KEY_INDUSTRY_IDENTIFIERS);
+		if (industryIdentifiers == null) {
+			return null;
+		}
+		JSONObject id = industryIdentifiers.getJSONObject(0);
+		return getString(id, KEY_IDENTIFIER);
+	}
+
 	private static String join(List<String> list, String separator) {
 		if (list == null) {
 			return null;
 		}
 
-		StringBuffer buf = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		int endIndex = list.size();
 
 		for (int i = 0; i < endIndex; i++) {
 			if (i > 0) {
-				buf.append(separator);
+				sb.append(separator);
 			}
 			if (list.get(i) != null) {
-				buf.append(list.get(i));
+				sb.append(list.get(i));
 			}
 		}
-		return buf.toString();
+		return sb.toString();
 	}
 
 }

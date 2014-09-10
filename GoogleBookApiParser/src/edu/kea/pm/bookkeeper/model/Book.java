@@ -2,8 +2,7 @@ package edu.kea.pm.bookkeeper.model;
 
 import java.io.Serializable;
 
-public class Book implements Serializable
-{
+public class Book implements Serializable {
 	private static final long serialVersionUID = -399086889791219587L;
 
 	public final static String BOOK_BUNDLE_KEY = "BOOK_BUNDLE_KEY";
@@ -18,27 +17,22 @@ public class Book implements Serializable
 	private String thumbnailURL;
 	private String loaner;
 	private String comment;
-	
-	public void setIsbn(String isbn)
-	{
+
+	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
-	
-	public String getIsbn()
-	{
+
+	public String getIsbn() {
 		return this.isbn;
 	}
-	
-	public void setTitle(String title)
-	{
+
+	public void setTitle(String title) {
 		this.title = title;
 	}
-	
-	public String getTitle()
-	{
+
+	public String getTitle() {
 		return this.title;
 	}
-	
 
 	public String getAuthors() {
 		return authors;
@@ -111,14 +105,14 @@ public class Book implements Serializable
 	public void setBookId(long bookId) {
 		this.bookId = bookId;
 	}
-	
+
 	@Override
-	public String toString()
-	{
-        return "Book [bookId=" + bookId + ", isbn=" + isbn + ", title=" + title + ", authors="
-                + authors + ", description=" + description + ", language=" + language
-                + ", pageCount=" + pageCount + ", published=" + published + ", thumbnailURL="
-				+ thumbnailURL + ", loaner=" + loaner + ", comment=" + comment + "]";
+	public String toString() {
+		return "Book [bookId=" + bookId + ", isbn=" + isbn + ", title=" + title
+				+ ", authors=" + authors + ", description=" + description
+				+ ", language=" + language + ", pageCount=" + pageCount
+				+ ", published=" + published + ", thumbnailURL=" + thumbnailURL
+				+ ", loaner=" + loaner + ", comment=" + comment + "]";
 	}
-	
+
 }
