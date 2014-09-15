@@ -30,10 +30,7 @@ public class LoanBookTests extends AbstractUiAutomatorTestCase {
 		assertTrue("View for managing books was not launched", manageView.isLaunched());
 		assertTrue("Fiels are missing from the view", manageView.areAllFieldsAccessible(true));
 		
-		manageView.editLoanerOfBook();
-		assertTrue("Alert for editing loaner is not shown",manageView.isAlertLoanOutShown());
 		manageView.clearLoaner();
-		manageView.confirmAlert();
 		assertFalse("The loaner is still visible after return of book", manageView.isLoanerVisible());
 	}
 	

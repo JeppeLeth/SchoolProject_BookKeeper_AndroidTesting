@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 import edu.kea.pm.bookkeeper.R;
 import edu.kea.pm.bookkeeper.database.Database;
 import edu.kea.pm.bookkeeper.database.DatabaseImpl;
@@ -53,6 +54,12 @@ public class BookSavedInfoActivity extends FragmentActivity implements BookSaved
     }
     
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+    	menu.removeItem(TextUtils.isEmpty(mBook.getLoaner()) ? R.id.action_loan_status_remove : R.id.action_loan_status_add);
+    	return super.onPrepareOptionsMenu(menu);
+    }
+    
+    @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
     	// Handle action buttons
@@ -75,7 +82,7 @@ public class BookSavedInfoActivity extends FragmentActivity implements BookSaved
 					.setNegativeButton(android.R.string.cancel, null);
 			builder.create().show();
             return true;
-        case R.id.action_loan_status_edit:
+        case R.id.action_loan_status_add:
         	LoanerPopupFragment popup = new LoanerPopupFragment();
         	Bundle bundle = new Bundle();
         	bundle.putString(LoanerPopupFragment.BUNDLE_LOANER_TEXT, mBook.getLoaner());
@@ -85,19 +92,27 @@ public class BookSavedInfoActivity extends FragmentActivity implements BookSaved
     			@Override
     			public void onOK(String text)
     			{
-    				mBook.setLoaner(TextUtils.isEmpty(text) ? null : text);
-    				mDatabase.saveBook(mBook);
-    				mFragment.updateBook();
+    				setLoanerOnBook(text);
     			}
+
     		});
         	popup.show(getSupportFragmentManager(), null);
+            return true;
+        case R.id.action_loan_status_remove:
+        	Toast.makeText(this, R.string.loaner_removed, Toast.LENGTH_LONG).show();
+			setLoanerOnBook(null);
             return true;
         default:
             return super.onOptionsItemSelected(item);
         }
     }
     
-    
+	private void setLoanerOnBook(String text) {
+		mBook.setLoaner(TextUtils.isEmpty(text) ? null : text);
+		mDatabase.saveBook(mBook);
+		mFragment.updateBook();
+		invalidateOptionsMenu();
+	}
     
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)

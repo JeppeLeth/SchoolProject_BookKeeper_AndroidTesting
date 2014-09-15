@@ -15,7 +15,8 @@ public class BookInfoManageViewPageObject extends PageObjectBase {
 	private UiObject loanerTitle = new UiObject(new UiSelector().resourceId("android:id/title"));
 	private UiObject editButton = new UiObject(new UiSelector().resourceId("edu.kea.pm.bookkeeper:id/action_edit"));
 	private UiObject deleteButton = new UiObject(new UiSelector().resourceId("edu.kea.pm.bookkeeper:id/action_delete"));
-	private UiObject loanButton = new UiObject(new UiSelector().resourceId("edu.kea.pm.bookkeeper:id/action_loan_status_edit"));
+	private UiObject addLoanButton = new UiObject(new UiSelector().resourceId("edu.kea.pm.bookkeeper:id/action_loan_status_add"));
+	private UiObject removeLoanButton = new UiObject(new UiSelector().resourceId("edu.kea.pm.bookkeeper:id/action_loan_status_remove"));
 	private UiObject isbnText = new UiObject(new UiSelector().resourceId("edu.kea.pm.bookkeeper:id/isbn"));
 	private UiObject titleText = new UiObject(new UiSelector().resourceId("edu.kea.pm.bookkeeper:id/title"));
 	private UiObject authorText = new UiObject(new UiSelector().resourceId("edu.kea.pm.bookkeeper:id/author"));
@@ -70,7 +71,7 @@ public class BookInfoManageViewPageObject extends PageObjectBase {
 		boolean found = true;
 		found = editButton.exists();
 		found = deleteButton.exists();
-		found = loanButton.exists();
+		found = loanedOut ? removeLoanButton.exists() : addLoanButton.exists();
 		if (new UiObject(new UiSelector().resourceId("edu.kea.pm.bookkeeper:id/ScrollView1")).isScrollable()) {
 			UiScrollable view = new UiScrollable(new UiSelector().scrollable(true));
 			view.setAsVerticalList();
@@ -116,7 +117,7 @@ public class BookInfoManageViewPageObject extends PageObjectBase {
 	}
 	
 	public void editLoanerOfBook() throws UiObjectNotFoundException{
-		clickAndWait(loanButton);
+		clickAndWait(addLoanButton);
 	}
 	
 	public void enterLoaner(String text) throws UiObjectNotFoundException{
@@ -124,7 +125,7 @@ public class BookInfoManageViewPageObject extends PageObjectBase {
 	}
 	
 	public void clearLoaner() throws UiObjectNotFoundException{
-		new UiObject(new UiSelector().resourceId("edu.kea.pm.bookkeeper:id/loaner_text")).clearTextField();
+		clickAndWait(removeLoanButton);
 	}
 	
 	
