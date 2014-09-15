@@ -1,60 +1,50 @@
 package edu.kea.pm.bookkeeper.http;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import org.json.JSONException;
-
 import android.os.AsyncTask;
 import edu.kea.pm.bookkeeper.api.BookAPI;
 import edu.kea.pm.bookkeeper.model.Book;
 
-public class DownloadBooksTask extends AsyncTask<String, Void, Book>{
+public class DownloadBooksTask extends AsyncTask<String, Void, Book> {
 
 	private DownloadListener listener;
-	
+
 	public interface DownloadListener {
 		public void onBusy();
 		public void onFinish(Book book);
-		
-	}
-	
-	public DownloadBooksTask(){
-		
 	}
 
-	
+	public DownloadBooksTask() {
+	}
+
 	public void setListener(DownloadListener listener) {
 		this.listener = listener;
 	}
-	
+
 	@Override
-	protected void onPreExecute() { 
+	protected void onPreExecute() {
 		super.onPreExecute();
 		if (listener != null) {
 			listener.onBusy();
 		}
 	}
-	
+
 	@Override
 	protected Book doInBackground(String... params) {
 		if ((params == null) || (params.length != 1)) {
-			throw new IllegalArgumentException("The URL is expected as a parameter.");
+			throw new IllegalArgumentException(
+					"The URL is expected as a parameter.");
 		}
-		 try
-		{
+		try {
 			// Fetches book information:
-            return BookAPI.readISBN(params[0]);
+			return BookAPI.readISBN(params[0]);
 
-        } catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			
+
 		}
 		return null;
 	}
-	
+
 	@Override
 	protected void onPostExecute(Book book) {
 		super.onPostExecute(book);
@@ -62,15 +52,16 @@ public class DownloadBooksTask extends AsyncTask<String, Void, Book>{
 			listener.onFinish(book);
 		}
 	}
-	
-//	protected InputStream download(String urlString) throws IOException {
-//	    HttpURLConnection conn = (HttpURLConnection) (new URL(urlString)).openConnection();
-//	    conn.setReadTimeout(10000);
-//	    conn.setConnectTimeout(15000);
-//	    conn.setRequestMethod("GET");
-//	    conn.setDoInput(true);
-//	    
-//	    conn.connect();
-//	    return conn.getInputStream();      
-//	}
+
+	// protected InputStream download(String urlString) throws IOException {
+	// HttpURLConnection conn = (HttpURLConnection) (new
+	// URL(urlString)).openConnection();
+	// conn.setReadTimeout(10000);
+	// conn.setConnectTimeout(15000);
+	// conn.setRequestMethod("GET");
+	// conn.setDoInput(true);
+	//
+	// conn.connect();
+	// return conn.getInputStream();
+	// }
 }

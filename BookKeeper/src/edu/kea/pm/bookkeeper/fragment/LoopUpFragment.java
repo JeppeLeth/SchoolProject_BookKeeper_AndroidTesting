@@ -20,78 +20,83 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import edu.kea.pm.bookkeeper.R;
 import edu.kea.pm.bookkeeper.activity.BookInfoActivity;
 
-public class LoopUpFragment extends Fragment
-{
-	
-	EditText mTextField;
-	Button mButtonScan;
-	Button mButtonLookUp;
+public class LoopUpFragment extends Fragment {
 
-    public LoopUpFragment() {
-        // Empty constructor required for fragment subclasses
-    }
+	private EditText mTextField;
+	private Button mButtonScan;
+	private Button mButtonLookUp;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_look_up, container, false);
-        mTextField = (EditText) rootView.findViewById(R.id.isbnEditText);
-        mButtonLookUp = (Button) rootView.findViewById(R.id.buttonLookUp);
-        mButtonScan = (Button) rootView.findViewById(R.id.buttonScan);
-        
-        mButtonLookUp.setOnClickListener(new OnClickListener() {
-			
+	public LoopUpFragment() {
+		// Empty constructor required for fragment subclasses
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View rootView = inflater.inflate(R.layout.fragment_look_up, container,
+				false);
+		mTextField = (EditText) rootView.findViewById(R.id.isbnEditText);
+		mButtonLookUp = (Button) rootView.findViewById(R.id.buttonLookUp);
+		mButtonScan = (Button) rootView.findViewById(R.id.buttonScan);
+
+		mButtonLookUp.setOnClickListener(new OnClickListener() {
+
 			@Override
-			public void onClick(View v)
-			{
+			public void onClick(View v) {
 				lookupIsbnInNewActivity();
 			}
 		});
-        mTextField.setOnEditorActionListener(new OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                boolean handled = false;
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                	lookupIsbnInNewActivity();
-                    handled = true;
-                }
-                return handled;
-            }
-        });
-        
-        mButtonScan.setOnClickListener(new OnClickListener() {
-			
+		mTextField.setOnEditorActionListener(new OnEditorActionListener() {
 			@Override
-			public void onClick(View v)
-			{
-				IntentIntegrator intentIntegrator = new IntentIntegrator(getActivity()); 
-				intentIntegrator.initiateScan(IntentIntegrator.TARGET_BARCODE_SCANNER_ONLY); // or QR_CODE_TYPES if you need to scan Q
+			public boolean onEditorAction(TextView v, int actionId,
+					KeyEvent event) {
+				boolean handled = false;
+				if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+					lookupIsbnInNewActivity();
+					handled = true;
+				}
+				return handled;
 			}
 		});
-        
-        
-        return rootView;
-    }
-    
-    private void lookupIsbnInNewActivity() {
-		try
-		{
+
+		mButtonScan.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				IntentIntegrator intentIntegrator = new IntentIntegrator(
+						getActivity());
+				intentIntegrator
+						.initiateScan(IntentIntegrator.TARGET_BARCODE_SCANNER_ONLY); // or
+																						// QR_CODE_TYPES
+																						// if
+																						// you
+																						// need
+																						// to
+																						// scan
+																						// Q
+			}
+		});
+
+		return rootView;
+	}
+
+	private void lookupIsbnInNewActivity() {
+		try {
 			Long.parseLong(mTextField.getText().toString().trim());
 			Intent intent = new Intent(getActivity(), BookInfoActivity.class);
-			intent.putExtra(BookInfoActivity.BUNDLE_BARCODE, mTextField.getText().toString().trim());
+			intent.putExtra(BookInfoActivity.BUNDLE_BARCODE, mTextField
+					.getText().toString().trim());
 			getActivity().startActivity(intent);
+		} catch (NumberFormatException e) {
+			Toast toast = Toast.makeText(getActivity(), "Input is not valid",
+					Toast.LENGTH_SHORT);
+			toast.show();
 		}
-		catch (NumberFormatException e)
-		{
-	    	Toast toast = Toast.makeText(getActivity(), "Input is not valid", Toast.LENGTH_SHORT);
-	    	toast.show();
-		}
-    }
-    
-    public void openBookForISBN(String isbn){
-    	mTextField.setText(isbn);
-    	mTextField.setSelection(mTextField.length());
-    }
-  
+	}
+
+	public void openBookForISBN(String isbn) {
+		mTextField.setText(isbn);
+		mTextField.setSelection(mTextField.length());
+	}
 
 }

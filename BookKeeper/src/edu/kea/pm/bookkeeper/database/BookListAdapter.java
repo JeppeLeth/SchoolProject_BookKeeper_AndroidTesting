@@ -24,43 +24,50 @@ public class BookListAdapter extends CursorAdapter {
 		public final TextView authors;
 		public final TextView year;
 		public final ImageView statusIndication;
-	
-		private ViewHolder(TextView title, TextView authors, TextView year, ImageView statusIndication) {
+
+		private ViewHolder(TextView title, TextView authors, TextView year,
+				ImageView statusIndication) {
 			this.title = title;
 			this.authors = authors;
 			this.year = year;
 			this.statusIndication = statusIndication;
 		}
-	
+
 		public static ViewHolder create(ViewGroup rootView) {
-			TextView title = (TextView)rootView.findViewById( R.id.title );
-			TextView authors = (TextView)rootView.findViewById( R.id.authors );
-			TextView year = (TextView)rootView.findViewById( R.id.year );
-			ImageView statusIndication = (ImageView)rootView.findViewById( R.id.status_indication );
-			return new ViewHolder( title, authors, year, statusIndication );
+			TextView title = (TextView) rootView.findViewById(R.id.title);
+			TextView authors = (TextView) rootView.findViewById(R.id.authors);
+			TextView year = (TextView) rootView.findViewById(R.id.year);
+			ImageView statusIndication = (ImageView) rootView
+					.findViewById(R.id.status_indication);
+			return new ViewHolder(title, authors, year, statusIndication);
 		}
 	}
-	
+
 	@Override
 	public void bindView(View view, Context context, Cursor cursor) {
-		final ViewHolder vh = (ViewHolder)view.getTag();
+		final ViewHolder vh = (ViewHolder) view.getTag();
 
 		// TODO Bind your data to the views here
-		
-		vh.title.setText(cursor.getString(cursor.getColumnIndex(BookTable.TITLE)));
-		vh.authors.setText(cursor.getString(cursor.getColumnIndex(BookTable.AUTHORS)));
-		vh.year.setText(cursor.getString(cursor.getColumnIndex(BookTable.PUBLISHED)));
-		
-		if ( TextUtils.isEmpty(cursor.getString(cursor.getColumnIndex(LoanTable.LOANER)))) {
+
+		vh.title.setText(cursor.getString(cursor
+				.getColumnIndex(BookTable.TITLE)));
+		vh.authors.setText(cursor.getString(cursor
+				.getColumnIndex(BookTable.AUTHORS)));
+		vh.year.setText(cursor.getString(cursor
+				.getColumnIndex(BookTable.PUBLISHED)));
+
+		if (TextUtils.isEmpty(cursor.getString(cursor
+				.getColumnIndex(LoanTable.LOANER)))) {
 			vh.statusIndication.setImageResource(R.drawable.book_green);
 		} else {
 			vh.statusIndication.setImageResource(R.drawable.book_red);
 		}
 	}
+
 	@Override
 	public View newView(Context context, Cursor cursor, ViewGroup parent) {
-		View view = mInflater.inflate( R.layout.book_list_item, parent, false );
-		view.setTag( ViewHolder.create( (ViewGroup)view ) );
+		View view = mInflater.inflate(R.layout.book_list_item, parent, false);
+		view.setTag(ViewHolder.create((ViewGroup) view));
 		return view;
 	}
 
@@ -69,10 +76,11 @@ public class BookListAdapter extends CursorAdapter {
 	// Constructors
 	public BookListAdapter(Context context) {
 		super(context, null, true);
-		this.mInflater = LayoutInflater.from( context );
+		this.mInflater = LayoutInflater.from(context);
 	}
+
 	public BookListAdapter(Context context, Cursor c) {
 		super(context, c, true);
-		this.mInflater = LayoutInflater.from( context );
+		this.mInflater = LayoutInflater.from(context);
 	}
 }
