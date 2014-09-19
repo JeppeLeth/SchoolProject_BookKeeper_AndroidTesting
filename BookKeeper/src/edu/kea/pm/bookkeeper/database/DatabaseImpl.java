@@ -143,8 +143,6 @@ public class DatabaseImpl implements Database {
 		return values;
 	}
 
-
-
 	public List<String> getBookTableColumns() {
 		List<String> columns = new ArrayList<String>();
 		columns.add(BookTable.TABLE_NAME + "." + BookTable.ID);

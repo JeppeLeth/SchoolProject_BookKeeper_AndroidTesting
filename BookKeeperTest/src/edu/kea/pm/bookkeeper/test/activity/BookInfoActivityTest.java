@@ -1,20 +1,15 @@
 package edu.kea.pm.bookkeeper.test.activity;
 
-import static org.mockito.Mockito.mock;
-
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 import org.json.JSONException;
 
-import org.mockito.Mockito;
-import org.mockito.Mockito.*;
 import android.annotation.SuppressLint;
 import android.app.UiAutomation;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import edu.kea.pm.bookkeeper.activity.BookInfoActivity;
-import edu.kea.pm.bookkeeper.http.DownloadBooksTask;
 import edu.kea.pm.bookkeeper.model.Book;
 
 @SuppressLint("NewApi")
@@ -40,11 +35,10 @@ public class BookInfoActivityTest extends ActivityInstrumentationTestCase2<BookI
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        System.setProperty("dexmaker.dexcache", getInstrumentation().getTargetContext().getCacheDir().toString());
         getInstrumentation().getUiAutomation().setRotation(UiAutomation.ROTATION_FREEZE_0);
         Intent intent = new Intent();
         intent.putExtra(BookInfoActivity.BUNDLE_BARCODE, "9781906124762");
-        //setActivityIntent(intent);
+        setActivityIntent(intent);
         mTestActivity = getActivity();
     }
     

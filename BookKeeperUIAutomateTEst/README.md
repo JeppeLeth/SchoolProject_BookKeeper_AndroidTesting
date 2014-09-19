@@ -28,3 +28,14 @@ Example of how to run:
 * cd "c:\Program Files (x86)\Android\android-sdk\platform-tools\"
 * adb push C:\Users\Jeppe\git\bookkeeper-bitbucket\BookKeeperUIAutomateTEst\bin\BookKeeperUIAutomateTEst.jar /data/local/tmp/
 * adb shell uiautomator runtest BookKeeperUIAutomateTEst.jar -c edu.kea.pm.bookkeeper.uitest.LaunchBookKeeper
+
+List of all tests:
+-c edu.kea.pm.bookkeeper.uitest.runnable.LaunchBookKeeper /*This is only for demo purposes*/
+
+-c edu.kea.pm.bookkeeper.uitest.runnable.NavigationTests
+-c edu.kea.pm.bookkeeper.uitest.runnable.ScannerLaunchTests
+-c edu.kea.pm.bookkeeper.uitest.runnable.MainSearchPageTests
+-c edu.kea.pm.bookkeeper.uitest.runnable.OnlineBookInformationRetrivalTests
+-c edu.kea.pm.bookkeeper.uitest.runnable.AddBookTests
+-c edu.kea.pm.bookkeeper.uitest.runnable.LoanBookTests
+-c edu.kea.pm.bookkeeper.uitest.runnable.DeleteBookTests
