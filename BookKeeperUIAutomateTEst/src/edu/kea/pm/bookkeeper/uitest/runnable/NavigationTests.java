@@ -1,6 +1,7 @@
 package edu.kea.pm.bookkeeper.uitest.runnable;
 
 import android.os.RemoteException;
+import android.os.SystemClock;
 
 import com.android.uiautomator.core.UiDevice;
 import com.android.uiautomator.core.UiObject;
@@ -46,9 +47,9 @@ public class NavigationTests extends AbstractUiAutomatorTestCase {
 		mDevice.setOrientationLeft();
 		assertTrue("The drawer menu is not open anymore", menuView.isLeftDrawerOpen());
 		
+		mDevice.setOrientationRight();
+		assertTrue("The drawer menu is not open anymore", menuView.isLeftDrawerOpen());
 		
 		menuView.toggleLeftDrawer(false);
-		mDevice.setOrientationRight();
-		assertFalse("The drawer menu is still open", menuView.isLeftDrawerOpen());
 	}
 }
