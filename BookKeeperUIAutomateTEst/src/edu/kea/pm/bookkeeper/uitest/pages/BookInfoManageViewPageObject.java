@@ -40,7 +40,7 @@ public class BookInfoManageViewPageObject extends PageObjectBase {
 	}
 	
 	public boolean isAlertLoanOutShown() throws UiObjectNotFoundException {
-		return loanerTitle.exists() && loanerTitle.getText().contains("loaner");
+		return loanerTitle.exists() && loanerTitle.getText().contains("lender");
 	}
 	
 	public void confirmAlert() throws UiObjectNotFoundException {

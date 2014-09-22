@@ -10,7 +10,7 @@ public class Constants {
 	 */
 	public static final long TIMEOUT_IN_MS = 10000L;
 	
-	public static final String TEXT_HINT = "ISBN / barcode";
+	public static final String TEXT_HINT = "ISBN / Barcode";
 	public static final String TEST_VALID_ISBN = "9781906124762";
 	public static final String TEST_UNKNOWN_ISBN = "123";
 	public static final String TEST_BOOK_TITLE = "00 test book";

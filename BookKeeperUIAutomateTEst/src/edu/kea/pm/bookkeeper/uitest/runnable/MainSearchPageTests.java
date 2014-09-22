@@ -1,5 +1,7 @@
 package edu.kea.pm.bookkeeper.uitest.runnable;
 
+import java.util.Locale;
+
 import android.os.RemoteException;
 import android.os.SystemClock;
 
@@ -36,7 +38,7 @@ public class MainSearchPageTests extends AbstractUiAutomatorTestCase {
 		MainSearchViewPageObject lookUpView = new MainSearchViewPageObject(mDevice);
 		lookUpView.enterText(TEST_INVALID_ISBN);
 		
-		assertEquals("Invalid text is shown in field", Constants.TEXT_HINT, lookUpView.getIsbnText());
+		assertEquals("Invalid text is shown in field", Constants.TEXT_HINT.toLowerCase(Locale.ENGLISH), lookUpView.getIsbnText().toLowerCase(Locale.ENGLISH));
 	}
 	
 	public void testTextRetainedWhenOrientationChange() throws UiObjectNotFoundException, RemoteException {

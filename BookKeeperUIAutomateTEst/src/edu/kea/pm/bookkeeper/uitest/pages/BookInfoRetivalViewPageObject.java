@@ -38,6 +38,11 @@ public class BookInfoRetivalViewPageObject extends PageObjectBase {
 	}
 	
 	public String getIsbnText() throws UiObjectNotFoundException {
+		if (new UiObject(new UiSelector().resourceId("edu.kea.pm.bookkeeper:id/ScrollView1")).isScrollable()) {
+			UiScrollable view = new UiScrollable(new UiSelector().scrollable(true));
+			view.setAsVerticalList();
+			view.scrollIntoView(isbnText);
+		}
 		return isbnText.getText();
 	}
 	
@@ -46,9 +51,8 @@ public class BookInfoRetivalViewPageObject extends PageObjectBase {
 		if (new UiObject(new UiSelector().resourceId("edu.kea.pm.bookkeeper:id/ScrollView1")).isScrollable()) {
 			UiScrollable view = new UiScrollable(new UiSelector().scrollable(true));
 			view.setAsVerticalList();
-			found = found && view.scrollIntoView(addButton);
+			found = found && addButton.exists();
 			found = found && view.scrollIntoView(isbnText);
-			found = found && view.scrollIntoView(titleText);
 			found = found && view.scrollIntoView(titleText);
 			found = found && view.scrollIntoView(authorText);
 			found = found && view.scrollIntoView(languageText);
@@ -58,7 +62,6 @@ public class BookInfoRetivalViewPageObject extends PageObjectBase {
 		} else {
 			found = addButton.exists();
 			found = found && isbnText.exists();;
-			found = found && titleText.exists();
 			found = found && titleText.exists();
 			found = found && authorText.exists();
 			found = found && languageText.exists();
